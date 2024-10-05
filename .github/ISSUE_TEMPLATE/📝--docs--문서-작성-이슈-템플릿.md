@@ -7,14 +7,14 @@ assignees: ''
 
 ---
 
-## 📝 개요
-- 자세한 개요 작성
+## 📝 Overview
+- Write a detailed overview
 
 ## ✔️ To-Do
-- [ ] 해야 할 일
+- [ ] Tasks to be completed
 
 ## 👀 ETC
-- 참고자료 등 기타 내용 작성
+- Write any additional information, such as reference materials
 
-## ⏰ 예상 소요 시간
-- ~ 까지 완료 예정
+## ⏰ Estimated Time Required
+- Expected to be completed by ~

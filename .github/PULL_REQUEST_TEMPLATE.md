@@ -1,27 +1,27 @@
-## ☝️Issue Number
+## ☝️ Issue Number
 - resolve #
 
-## 📍 PR 타입 (하나 이상 선택)
-- [ ] 기능 추가
-- [ ] 버그 수정
-- [ ] 의존성, 환경 변수, 빌드 관련 코드 업데이트
-- [ ] 기타 사소한 수정
+## 📍 PR Type (Select one or more)
+- [ ] Feature addition
+- [ ] Bug fix
+- [ ] Update dependencies, environment variables, or build-related code
+- [ ] Other minor changes
 
-## 📌 개요
-- 개요 작성
+## 📌 Overview
+- Write an overview
 
 ## 🔎 Key Changes
-- commit 과 함께 첨부해주세요
+- Please attach along with the commit
 
 ## 💌 To Reviewers
-- 리뷰어가 참고해야 하는 내용
+- Information for reviewers to consider
 
-## 📸 스크린샷
-- 선택사항 입니다.
+## 📸 Screenshot
+- Optional.
 
-## ✅ 체크 리스트
-- [ ] PR 템플릿에 맞추어 작성했어요.
-- [ ] 변경 내용에 대한 테스트를 진행했어요.
-- [ ] 프로그램이 정상적으로 동작해요.
-- [ ] PR에 적절한 라벨을 선택했어요.
-- [ ] 불필요한 코드는 삭제했어요.
+## ✅ Checklist
+- [ ] I have followed the PR template.
+- [ ] I have tested the changes.
+- [ ] The program works correctly.
+- [ ] I have selected appropriate labels for the PR.
+- [ ] I have removed unnecessary code.
