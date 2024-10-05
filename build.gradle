@@ -2,6 +2,7 @@ plugins {
     id 'org.jetbrains.kotlin.jvm' version '1.9.25'
     id 'org.jetbrains.kotlin.plugin.spring' version '1.9.25'
     id 'org.springframework.boot' version '3.3.4'
+    id 'org.jetbrains.kotlin.kapt' version '1.9.25'
     id 'io.spring.dependency-management' version '1.1.6'
 }
 
@@ -26,6 +27,7 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
     implementation 'com.fasterxml.jackson.module:jackson-module-kotlin'
     implementation 'org.jetbrains.kotlin:kotlin-reflect'
     compileOnly 'org.projectlombok:lombok'
@@ -34,13 +36,20 @@ dependencies {
     testImplementation 'org.jetbrains.kotlin:kotlin-test-junit5'
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 
-    // swagger
+    // Swagger
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.0.2'
+
+    // QueryDSL
+    implementation "com.querydsl:querydsl-jpa:5.0.0"
+    kapt "com.querydsl:querydsl-apt:5.0.0:jpa"
+
+    // Explicitly add javax.persistence dependency
+    implementation 'javax.persistence:javax.persistence-api:2.2' // Ensure you're using javax
 }
 
 kotlin {
     compilerOptions {
-        freeCompilerArgs.addAll '-Xjsr305=strict'
+        freeCompilerArgs.addAll('-Xjsr305=strict')
     }
 }
 
