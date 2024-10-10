@@ -1,4 +1,4 @@
-package com.swcontest.somding.config
+package com.swcontest.somding.common.config
 
 import com.querydsl.jpa.impl.JPAQueryFactory
 import jakarta.persistence.EntityManager
