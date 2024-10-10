@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository
 class ProjectQueryRepositoryImpl(
         private val jpaQueryFactory: JPAQueryFactory
 ) : ProjectQueryRepository {
-
 }
