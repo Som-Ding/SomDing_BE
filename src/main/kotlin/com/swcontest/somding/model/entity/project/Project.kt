@@ -1,12 +1,12 @@
 package com.swcontest.somding.model.entity.project
 
+import com.fasterxml.jackson.annotation.JsonBackReference
 import com.swcontest.somding.model.entity.common.BaseEntity
-import com.swcontest.somding.model.entity.enum.ProjectCategory
+import com.swcontest.somding.model.entity.enums.ProjectCategory
 import com.swcontest.somding.model.entity.member.Member
-import com.swcontest.somding.model.entity.option.Option
 import jakarta.persistence.*
-import com.swcontest.somding.model.entity.order.Order
-import com.swcontest.somding.model.entity.qna.Qna
+import lombok.ToString
+import java.time.LocalDate
 
 @Entity
 data class Project(
@@ -19,27 +19,40 @@ data class Project(
         var introduce: String,
         var policy: String,
         var schedule: String,
-        var category: ProjectCategory,
+
         var targetPrice: Int,
+
         var gatherPrice: Int,
+
         var price: Int,
+
         var sponsorNum: Int,
 
-        @OneToMany(mappedBy = "project", cascade = [CascadeType.ALL])
-        var optionList: MutableList<Option> = mutableListOf(),
-
-        @OneToMany(mappedBy = "project", cascade = [CascadeType.ALL])
-        var orderList: MutableList<Order> = mutableListOf(),
-
-        @OneToMany(mappedBy = "project", cascade = [CascadeType.ALL])
-        var projectImgList: MutableList<ProjectImage> = mutableListOf(),
-
+        var targetDate: LocalDate,
+        @Enumerated(EnumType.STRING)
+        var category: ProjectCategory,
 
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "member_id")
-        var member: Member,
+        var member: Member?,
 
-        @OneToMany(mappedBy = "project", cascade = [CascadeType.ALL], orphanRemoval = true)
-        var qnaList: MutableList<Qna> = mutableListOf() // Qna와의 일대다 관계
+         @OneToMany(mappedBy = "project", cascade = [CascadeType.ALL])
+         var projectImgList: MutableList<ProjectImage>?
 
-) : BaseEntity()
+) : BaseEntity() {
+    constructor() : this(
+            0L,
+            "",
+            "",
+            "",
+            "",
+            0,
+            0,
+            0,
+            0,
+            LocalDate.now(),
+            ProjectCategory.DEFAULT,
+            null,
+            mutableListOf()
+    )
+}

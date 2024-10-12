@@ -10,9 +10,16 @@ data class ProjectImage(
         @GeneratedValue(strategy = GenerationType.IDENTITY)
         val projectImageId: Long,
 
-        var imageUrl: String, // Change to String for URL
+        var imageUrl: String?,
 
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "project_id")
-        var project: Project // Project와의 관계
-) : BaseEntity()
+        var project: Project? // Project와의 관계
+) : BaseEntity() {
+    constructor() : this(0L,
+            null,
+            null
+            ) {
+
+    }
+}
