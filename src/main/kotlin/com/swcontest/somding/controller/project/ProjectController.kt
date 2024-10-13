@@ -1,4 +1,4 @@
-package com.swcontest.somding.controller
+package com.swcontest.somding.controller.project
 
 import com.swcontest.somding.model.dto.response.ProjectDetailImgResponseDTO
 import com.swcontest.somding.common.apiPayload.ApiResponse

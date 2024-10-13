@@ -2,7 +2,6 @@ package com.swcontest.somding.service.project
 
 import com.swcontest.somding.mapper.ProjectMapper
 import com.swcontest.somding.model.dto.response.ProjectDetailImgResponseDTO
-import com.swcontest.somding.model.dto.response.ProjectDetailResponseDTO
 import com.swcontest.somding.model.dto.response.ProjectResponseDTO
 import com.swcontest.somding.model.entity.enums.ClassifyCategory
 import com.swcontest.somding.model.entity.enums.ProjectCategory
@@ -12,8 +11,7 @@ import org.springframework.transaction.annotation.Transactional
 
 @Service
 @Transactional(readOnly = true)
-class ProjectQueryImplService(val projectRepository: ProjectRepository,
-                              private val projectMapper: ProjectMapper
+class ProjectQueryServiceImpl(val projectRepository: ProjectRepository
 ) : ProjectQueryService{
     override fun readMyProject(memberId: Long): List<ProjectResponseDTO> {
         return projectRepository.getMyProjectByMemberId(1)

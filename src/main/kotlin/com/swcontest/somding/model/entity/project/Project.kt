@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference
 import com.swcontest.somding.model.entity.common.BaseEntity
 import com.swcontest.somding.model.entity.enums.ProjectCategory
 import com.swcontest.somding.model.entity.member.Member
+import com.swcontest.somding.model.entity.scrap.Scrap
 import jakarta.persistence.*
 import lombok.ToString
 import java.time.LocalDate
@@ -36,8 +37,11 @@ data class Project(
         @JoinColumn(name = "member_id")
         var member: Member?,
 
-         @OneToMany(mappedBy = "project", cascade = [CascadeType.ALL])
-         var projectImgList: MutableList<ProjectImage>?
+        @OneToMany(mappedBy = "project", cascade = [CascadeType.ALL])
+        var projectImgList: MutableList<ProjectImage>?,
+
+        @OneToMany(mappedBy = "project", cascade = [CascadeType.ALL], orphanRemoval = true)
+        var scrapList: MutableList<Scrap> = mutableListOf()
 
 ) : BaseEntity() {
     constructor() : this(

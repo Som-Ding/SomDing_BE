@@ -15,7 +15,12 @@ enum class ProjectErrorCode(override val httpStatus: HttpStatus, override val co
 
  PROJECT_DELETED_FAILED(HttpStatus.BAD_REQUEST, "PROJECT402", "프로젝트를 이미 후원한 사용자가 있어 삭제 불가능합니다."),
 
-    // 비밀번호 재확인이 올바르지 않을 때
+   //이미 좋아요 있을 때
+   SCRAP_ALREADY_EXISTS(HttpStatus.BAD_REQUEST, "PROJECT403", "이미 관심 프로젝트에 등록 된 프로젝트입니다."),
+
+    
+    SCRAP_NOT_FOUND(HttpStatus.NOT_FOUND, "SCRAP401", "스크랩을 찾을 수 없습니다"),
+   // 비밀번호 재확인이 올바르지 않을 때
     PASSWORD_NOT_EQUAL(HttpStatus.BAD_REQUEST, "MEMBER402", "비밀번호가 일치하지 않습니다."),
 
     // 이메일 없을 때

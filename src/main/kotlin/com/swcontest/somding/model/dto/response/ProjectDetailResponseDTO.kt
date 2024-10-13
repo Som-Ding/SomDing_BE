@@ -12,6 +12,7 @@ data class ProjectDetailResponseDTO(
         var targetDate: LocalDate,
         var sponsorNum: Int,
         var price: Int,
+        var scrapNum: Long,
 )
 data class ProjectDetailImgResponseDTO(
 
@@ -23,5 +24,6 @@ data class ProjectDetailImgResponseDTO(
         var targetDate: LocalDate,
         var sponsorNum: Int,
         var price: Int,
+        var scrapNum: Long,
         var imgList: List<String>
 )
