@@ -10,8 +10,6 @@ import com.swcontest.somding.model.entity.project.Project
 
 interface ProjectQueryRepository {
     fun getMyProjectByMemberId(memberId: Long): List<ProjectResponseDTO>
-    fun test(memberId: Long): Member?
-
     fun getProject(projectId: Long): ProjectDetailImgResponseDTO
 
     fun getProjectByCategory(projectCategory: ProjectCategory, classifyCategory: ClassifyCategory): List<ProjectResponseDTO>

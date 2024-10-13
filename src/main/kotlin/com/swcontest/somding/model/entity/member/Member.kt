@@ -3,11 +3,11 @@ package com.swcontest.somding.model.entity.member
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import com.swcontest.somding.model.entity.common.BaseEntity
 import com.swcontest.somding.model.entity.project.Project
+import com.swcontest.somding.model.entity.scrap.Scrap
 import jakarta.persistence.*
 import lombok.ToString
 
 @Entity
-@ToString(exclude = arrayOf("member"))
 data class Member(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -22,7 +22,11 @@ data class Member(
         var address: String,
 
         @OneToMany(mappedBy = "member", cascade = [CascadeType.ALL], orphanRemoval = true)
-        var projectList: MutableList<Project> = mutableListOf()
+        var projectList: MutableList<Project> = mutableListOf(),
+
+        @OneToMany(mappedBy = "member", cascade = [CascadeType.ALL], orphanRemoval = true)
+        var scrapList: MutableList<Scrap> = mutableListOf()
+
 
 ) : BaseEntity() {
     // 기본 생성자
@@ -34,6 +38,5 @@ data class Member(
             "",
             "",
             "",
-            mutableListOf()
     )
 }
