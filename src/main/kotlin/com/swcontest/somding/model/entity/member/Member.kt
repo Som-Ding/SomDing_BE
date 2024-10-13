@@ -3,6 +3,7 @@ package com.swcontest.somding.model.entity.member
 import com.fasterxml.jackson.annotation.JsonManagedReference
 import com.swcontest.somding.model.entity.common.BaseEntity
 import com.swcontest.somding.model.entity.project.Project
+import com.swcontest.somding.model.entity.qna.Qna
 import com.swcontest.somding.model.entity.scrap.Scrap
 import jakarta.persistence.*
 import lombok.ToString
@@ -25,7 +26,10 @@ data class Member(
         var projectList: MutableList<Project> = mutableListOf(),
 
         @OneToMany(mappedBy = "member", cascade = [CascadeType.ALL], orphanRemoval = true)
-        var scrapList: MutableList<Scrap> = mutableListOf()
+        var scrapList: MutableList<Scrap> = mutableListOf(),
+
+        @OneToMany(mappedBy = "member", cascade = [CascadeType.ALL], orphanRemoval = true)
+        var qnaList: MutableList<Qna> = mutableListOf()
 
 
 ) : BaseEntity() {

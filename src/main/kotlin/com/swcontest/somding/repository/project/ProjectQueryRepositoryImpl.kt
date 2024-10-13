@@ -8,7 +8,6 @@ import com.swcontest.somding.model.dto.response.ProjectDetailResponseDTO
 import com.swcontest.somding.model.dto.response.ProjectResponseDTO
 import com.swcontest.somding.model.entity.enums.ClassifyCategory
 import com.swcontest.somding.model.entity.enums.ProjectCategory
-import com.swcontest.somding.model.entity.member.Member
 import com.swcontest.somding.model.entity.project.QProject.project
 import com.swcontest.somding.model.entity.project.QProjectImage.projectImage
 import com.swcontest.somding.model.entity.scrap.QScrap.scrap
