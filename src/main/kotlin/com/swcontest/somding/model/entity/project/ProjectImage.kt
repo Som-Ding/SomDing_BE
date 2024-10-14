@@ -14,5 +14,5 @@ data class ProjectImage(
 
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "project_id")
-        var project: Project? // Project와의 관계
+        var project: Project // Project와의 관계
 ) : BaseEntity()

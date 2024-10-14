@@ -3,14 +3,19 @@ package com.swcontest.somding.repository.project
 import com.querydsl.core.types.Projections
 import com.querydsl.jpa.JPAExpressions
 import com.querydsl.jpa.impl.JPAQueryFactory
+import com.swcontest.somding.exception.project.ProjectErrorCode
+import com.swcontest.somding.exception.project.ProjectException
+import com.swcontest.somding.model.dto.response.OptionDTO
 import com.swcontest.somding.model.dto.response.ProjectDetailImgResponseDTO
 import com.swcontest.somding.model.dto.response.ProjectDetailResponseDTO
 import com.swcontest.somding.model.dto.response.ProjectResponseDTO
 import com.swcontest.somding.model.entity.enums.ClassifyCategory
+import com.swcontest.somding.model.entity.enums.OptionCategory
 import com.swcontest.somding.model.entity.enums.ProjectCategory
 import com.swcontest.somding.model.entity.project.QProject.project
 import com.swcontest.somding.model.entity.project.QProjectImage.projectImage
 import com.swcontest.somding.model.entity.scrap.QScrap.scrap
+import com.swcontest.somding.model.entity.option.QOption.option1
 import org.springframework.stereotype.Repository
 
 @Repository
@@ -71,7 +76,7 @@ class ProjectQueryRepositoryImpl(
                         project.sponsorNum,
                         project.price
                 )
-                .fetchOne() ?: throw NoSuchElementException("Project not found")
+                .fetchOne() ?: throw ProjectException(ProjectErrorCode.PROJECT_NOT_FOUND)
 
 
         val imgList: List<String> = jpaQueryFactory
@@ -79,6 +84,21 @@ class ProjectQueryRepositoryImpl(
                 .from(projectImage)
                 .where(projectImage.project.projectId.eq(projectId))
                 .fetch()
+
+        val options = jpaQueryFactory
+                .select(Projections.constructor(OptionDTO::class.java,
+                        option1.optionId,
+                        option1.optionCategory,
+                        option1.option))
+                .from(option1)
+                .where(option1.project.projectId.eq(projectId))
+                .fetch()
+
+
+        val colorList = options.filter { it.optionCategory == OptionCategory.COLOR }
+        val sizeList = options.filter { it.optionCategory == OptionCategory.SIZE }
+        val otherList = options.filter { it.optionCategory == OptionCategory.OTHER }
+
         return ProjectDetailImgResponseDTO(
                 projectId = projectDetail.projectId,
                 title = projectDetail.title,
@@ -89,9 +109,13 @@ class ProjectQueryRepositoryImpl(
                 sponsorNum = projectDetail.sponsorNum,
                 price = projectDetail.price,
                 scrapNum = projectDetail.scrapNum,
-                imgList = imgList
+                imgList = imgList,
+                colorList = colorList,
+                sizeList = sizeList,
+                otherList = otherList
         )
     }
+
 
     override fun getProjectByCategory(category: ProjectCategory, classify: ClassifyCategory): List<ProjectResponseDTO> {
         val query = jpaQueryFactory.select(Projections.constructor(

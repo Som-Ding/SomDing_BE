@@ -1,9 +1,12 @@
 package com.swcontest.somding.model.dto.request
 
+import com.fasterxml.jackson.annotation.JsonInclude
 import com.swcontest.somding.model.entity.enums.ProjectCategory
 import java.time.LocalDate
 import java.time.LocalDateTime
 
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 data class ProjectRequestDTO(
         var title: String,
         var introduce: String,
@@ -11,9 +14,9 @@ data class ProjectRequestDTO(
         var schedule: String,
         var category: ProjectCategory,
         var targetPrice: Int,
-        var gatherPrice: Int,
         var price: Int,
-        var sponsorNum: Int =0,
-        var targetDate: LocalDate
-//        var options: List<String>
+        var targetDate: LocalDate,
+        var colorList: List<String>?,
+        var sizeList: List<String>?,
+        var otherList: List<String>?
 )
