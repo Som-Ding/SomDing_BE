@@ -4,6 +4,9 @@ plugins {
     id 'org.springframework.boot' version '3.3.4'
     id 'org.jetbrains.kotlin.kapt' version '1.9.25'
     id 'io.spring.dependency-management' version '1.1.6'
+    id 'org.jetbrains.kotlin.plugin.jpa' version '1.9.25'
+    id 'org.jetbrains.kotlin.plugin.noarg' version '1.9.25'
+    id 'org.jetbrains.kotlin.plugin.allopen' version '1.9.25'
 }
 
 group = 'com.swcontest'
@@ -48,14 +51,13 @@ dependencies {
     // MariaDB
     runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
 
-    //mySQL
+    // MySQL
     runtimeOnly 'mysql:mysql-connector-java:8.0.32'
 
     // MapStruct
     implementation 'org.mapstruct:mapstruct:1.5.3.Final'
     kapt 'org.mapstruct:mapstruct-processor:1.5.3.Final'
     kaptTest 'org.mapstruct:mapstruct-processor:1.5.3.Final'
-
 }
 
 kotlin {
@@ -70,4 +72,20 @@ tasks.named('test') {
 
 kapt {
     includeCompileClasspath = false
+}
+
+// NoArg 플러그인 설정
+noArg {
+    annotation("jakarta.persistence.Entity")
+}
+
+// allOpen 플러그인 설정
+allOpen {
+    annotation("jakarta.persistence.Entity")
+    annotation("jakarta.persistence.Embeddable")
+    annotation("jakarta.persistence.MappedSuperclass")
+}
+
+noArg {
+    annotation("jakarta.persistence.Entity")
 }

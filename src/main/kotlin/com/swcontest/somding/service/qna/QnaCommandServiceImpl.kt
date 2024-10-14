@@ -29,7 +29,7 @@ class QnaCommandServiceImpl(
         //projectId
         val project = projectRepository.findById(qnaRequestDTO.projectId).orElseThrow{ProjectException(ProjectErrorCode.PROJECT_NOT_FOUND)}
 
-        val qna =qnaMapper.toEntity(project, member)
+        val qna =qnaMapper.toEntity(qnaRequestDTO, project, member)
         qnaRepository.save(qna)
     }
 
