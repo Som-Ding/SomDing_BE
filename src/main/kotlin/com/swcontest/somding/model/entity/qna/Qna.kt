@@ -4,6 +4,8 @@ import com.swcontest.somding.model.entity.common.BaseEntity
 import com.swcontest.somding.model.entity.member.Member
 import com.swcontest.somding.model.entity.project.Project
 import jakarta.persistence.*
+import org.jetbrains.annotations.NotNull
+import org.jetbrains.annotations.Nullable
 
 
 @Entity
@@ -12,7 +14,7 @@ data class Qna(
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
 
-        val questionId: Long = 0, // 기본값 설정
+        val questionId: Long , // 기본값 설정
 
         @ManyToOne(fetch = FetchType.LAZY)
         @JoinColumn(name = "member_id")
@@ -26,20 +28,15 @@ data class Qna(
 //        @JoinColumn(name = "order_id") // foreign key
 //        var order: Order, // Order relationship
 
-
+        @NotNull
         var title: String,
+
+        @NotNull
         var question: String,
+
+        @Nullable
         var answer: String? = null,
 
         @Column(name = "is_private")
-        var isPrivate: Boolean
-) : BaseEntity(){
-    constructor() : this(
-            member = Member(), // Initialize with a default Member instance
-            project = Project(), // Initialize with a default Project instance
-            title = "",
-            question = "",
-            answer = null,
-            isPrivate = false
-    )
-}
+        var isPrivate: Boolean = false
+) : BaseEntity()

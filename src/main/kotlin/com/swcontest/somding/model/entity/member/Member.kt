@@ -1,12 +1,11 @@
 package com.swcontest.somding.model.entity.member
 
-import com.fasterxml.jackson.annotation.JsonManagedReference
 import com.swcontest.somding.model.entity.common.BaseEntity
 import com.swcontest.somding.model.entity.project.Project
 import com.swcontest.somding.model.entity.qna.Qna
 import com.swcontest.somding.model.entity.scrap.Scrap
 import jakarta.persistence.*
-import lombok.ToString
+import lombok.NoArgsConstructor
 
 @Entity
 data class Member(
@@ -32,15 +31,4 @@ data class Member(
         var qnaList: MutableList<Qna> = mutableListOf()
 
 
-) : BaseEntity() {
-    // 기본 생성자
-    constructor() : this(
-            0L,
-            "",
-            "",
-            "",
-            "",
-            "",
-            "",
-    )
-}
+) : BaseEntity()

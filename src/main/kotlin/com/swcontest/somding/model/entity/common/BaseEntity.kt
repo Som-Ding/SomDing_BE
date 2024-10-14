@@ -11,7 +11,4 @@ open class BaseEntity(
 
         @Column(nullable = false)
         var updatedAt: LocalDateTime = LocalDateTime.now()
-) {
-        // No-argument constructor for JPA
-        protected constructor() : this(LocalDateTime.now(), LocalDateTime.now())
-}
+)
