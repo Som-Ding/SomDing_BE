@@ -6,39 +6,39 @@ import com.swcontest.somding.model.entity.enums.ProjectCategory
 import java.time.LocalDate
 
 data class ProjectDetailResponseDTO(
-        var projectId: Long,
-        var title: String,
-        var category: ProjectCategory? = null,
-        var targetPrice: Int,
-        var gatherPrice: Int,
-        var targetDate: LocalDate,
-        var sponsorNum: Int,
-        var price: Int,
-        var scrapNum: Long,
+        val projectId: Long,
+        val title: String,
+        val category: ProjectCategory? = null,
+        val targetPrice: Int,
+        val gatherPrice: Int,
+        val targetDate: LocalDate,
+        val sponsorNum: Int,
+        val price: Int,
+        val scrapNum: Long,
 )
 
 data class ProjectDetailImgResponseDTO(
 
-        var projectId: Long,
-        var title: String,
-        var category: ProjectCategory? = null,
-        var targetPrice: Int,
-        var gatherPrice: Int,
-        var targetDate: LocalDate,
-        var sponsorNum: Int,
-        var price: Int,
-        var scrapNum: Long,
-        var imgList: List<String>,
+        val projectId: Long,
+        val title: String,
+        val category: ProjectCategory? = null,
+        val targetPrice: Int,
+        val gatherPrice: Int,
+        val targetDate: LocalDate,
+        val sponsorNum: Int,
+        val price: Int,
+        val scrapNum: Long,
+        val imgList: List<String>,
         @JsonInclude(JsonInclude.Include.NON_NULL)
-        var colorList: List<OptionDTO>?,
+        val colorList: List<OptionDTO>?,
         @JsonInclude(JsonInclude.Include.NON_NULL)
-        var sizeList: List<OptionDTO>?,
+        val sizeList: List<OptionDTO>?,
         @JsonInclude(JsonInclude.Include.NON_NULL)
-        var otherList: List<OptionDTO>?
+        val otherList: List<OptionDTO>?
 
 )
 data class OptionDTO(
-        var optionId:Long,
-        var optionCategory:OptionCategory,
-        var option: String
+        val optionId:Long,
+        val optionCategory:OptionCategory,
+        val option: String
 )

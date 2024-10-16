@@ -4,9 +4,9 @@ import java.time.LocalDateTime
 
 data class QnaDetailResponseDTO(
         val questionId:Long,
-        var title: String,
-        var question: String,
-        var createdAt: LocalDateTime,
-        var updatedAt: LocalDateTime,
-        var answer:String?
+        val title: String,
+        val question: String,
+        val createdAt: LocalDateTime,
+        val updatedAt: LocalDateTime,
+        val answer:String?
 )
