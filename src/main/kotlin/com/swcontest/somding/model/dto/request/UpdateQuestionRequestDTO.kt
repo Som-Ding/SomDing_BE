@@ -1,7 +1,7 @@
 package com.swcontest.somding.model.dto.request
 
 data class UpdateQuestionRequestDTO(
-        var questionId: Long,
-        var title: String,
-        var question: String,
+        val questionId: Long,
+        val title: String,
+        val question: String,
 )

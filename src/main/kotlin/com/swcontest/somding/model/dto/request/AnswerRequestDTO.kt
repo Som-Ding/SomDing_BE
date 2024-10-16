@@ -1,6 +1,6 @@
 package com.swcontest.somding.model.dto.request
 
 data class AnswerRequestDTO(
-        var questionId: Long,
-        var answer: String
+        val questionId: Long,
+        val answer: String
 )
