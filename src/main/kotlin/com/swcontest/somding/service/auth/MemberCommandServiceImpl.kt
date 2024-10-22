@@ -1,6 +1,7 @@
 package com.swcontest.somding.service.auth
 
 import com.swcontest.somding.common.apiPayload.code.GeneralErrorCode
+import com.swcontest.somding.common.config.s3.S3Manager
 import com.swcontest.somding.exception.member.MemberErrorCode
 import com.swcontest.somding.exception.member.MemberException
 import com.swcontest.somding.jwt.JwtManager
@@ -11,12 +12,15 @@ import com.swcontest.somding.model.dto.request.member.UpdatePasswordRequestDTO
 import com.swcontest.somding.model.dto.request.member.UpdateProfileRequestDTO
 import com.swcontest.somding.model.dto.response.auth.TokenResponseDTO
 import com.swcontest.somding.model.entity.member.Member
+import com.swcontest.somding.model.entity.project.ProjectImage
 import com.swcontest.somding.repository.member.MemberRepository
 import jakarta.servlet.http.HttpServletRequest
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 import org.springframework.util.StringUtils
+import org.springframework.web.multipart.MultipartFile
+import java.util.*
 
 @Service
 @Transactional
@@ -24,7 +28,8 @@ class MemberCommandServiceImpl(
         private val memberRepository: MemberRepository,
         private val memberMapper: MemberMapper,
         private val passwordEncoder: PasswordEncoder,
-        private val jwtManager: JwtManager
+        private val jwtManager: JwtManager,
+        private val s3Manager: S3Manager,
 ): MemberCommandService {
     override fun signup(signupRequestDTO: SignupRequestDTO) {
         if (memberRepository.findByEmail(signupRequestDTO.email) != null) {
@@ -67,10 +72,23 @@ class MemberCommandServiceImpl(
         throw MemberException(GeneralErrorCode.UNAUTHORIZED_401)
     }
 
-    override fun updateProfile(updateProfileRequestDTO: UpdateProfileRequestDTO, member: Member) {
+    override fun updateProfile(updateProfileRequestDTO: UpdateProfileRequestDTO, image: MultipartFile, member: Member) {
         val getMember: Member = memberRepository.findById(member.memberId)
                 .orElseThrow { MemberException(MemberErrorCode.MEMBER_NOT_FOUND) }
-        getMember.updateProfile(updateProfileRequestDTO)
+
+        getMember.profileImg?.let { s3Manager.deleteFile(it) }
+
+        var imageUrl: String?
+
+        if (image != null && !image.isEmpty) {
+            val uuid = UUID.randomUUID()
+            val keyNames = s3Manager.generateProfileKeyName(uuid)
+            imageUrl = s3Manager.uploadFile(keyNames, image)
+        }
+        else{
+            imageUrl=null
+        }
+        getMember.updateProfile(updateProfileRequestDTO, imageUrl)
 
     }
 

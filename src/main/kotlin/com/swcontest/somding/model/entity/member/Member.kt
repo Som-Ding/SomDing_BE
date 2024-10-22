@@ -38,9 +38,9 @@ data class Member(
         fun updateRefreshToken(refreshToken: String) {
                 this.refreshToken = refreshToken
         }
-        fun updateProfile(updateProfileRequestDTO: UpdateProfileRequestDTO){
+        fun updateProfile(updateProfileRequestDTO: UpdateProfileRequestDTO, url: String?){
                 this.nickname = updateProfileRequestDTO.nickname
-                this.profileImg = updateProfileRequestDTO.profileImg
+                this.profileImg = url
         }
 
         // UserDetails 인터페이스 구현
