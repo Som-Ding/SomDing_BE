@@ -30,7 +30,7 @@ class SpringSecurityConfig(
                 web.ignoring().requestMatchers(
                         "/swagger-ui/**", "/swagger/**", "/swagger-resources/**", "/swagger-ui.html",
                         "/configuration/ui", "/v3/api-docs/**", "/h2-console/**",  "/api/auth/login",
-                        "/api/signup"
+                        "/api/auth/signup"
                 )
         }
     }
