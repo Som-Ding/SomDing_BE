@@ -8,6 +8,7 @@ import com.swcontest.somding.mapper.QnaMapper
 import com.swcontest.somding.model.dto.request.AnswerRequestDTO
 import com.swcontest.somding.model.dto.request.CreateQuestionRequestDTO
 import com.swcontest.somding.model.dto.request.UpdateQuestionRequestDTO
+import com.swcontest.somding.model.entity.member.Member
 import com.swcontest.somding.repository.member.MemberRepository
 import com.swcontest.somding.repository.project.ProjectRepository
 import com.swcontest.somding.repository.qna.QnaRepository
@@ -33,16 +34,16 @@ class QnaCommandServiceImpl(
         qnaRepository.save(qna)
     }
 
-    override fun updateAnswer(answerRequestDTO: AnswerRequestDTO, memberId: Long) {
-        qnaRepository.updateAnswer(answerRequestDTO, memberId)
+    override fun updateAnswer(answerRequestDTO: AnswerRequestDTO, member: Member) {
+        qnaRepository.updateAnswer(answerRequestDTO, member.memberId)
     }
 
-    override fun deleteQuestion(questionId: Long, memberId: Long) {
-        qnaRepository.deleteQuestion(questionId, memberId)
+    override fun deleteQuestion(questionId: Long, member: Member) {
+        qnaRepository.deleteQuestion(questionId, member.memberId)
     }
 
-    override fun updateQuestion(questionRequestDTO: UpdateQuestionRequestDTO, memberId: Long) {
-        qnaRepository.updateQuestion(questionRequestDTO, memberId)
+    override fun updateQuestion(questionRequestDTO: UpdateQuestionRequestDTO, member: Member) {
+        qnaRepository.updateQuestion(questionRequestDTO, member.memberId)
     }
 
 

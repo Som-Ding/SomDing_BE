@@ -6,9 +6,11 @@ import com.swcontest.somding.model.dto.request.CreateQuestionRequestDTO
 import com.swcontest.somding.model.dto.request.UpdateQuestionRequestDTO
 import com.swcontest.somding.model.dto.response.QnaDetailResponseDTO
 import com.swcontest.somding.model.dto.response.QnaResponseDTO
+import com.swcontest.somding.model.entity.member.Member
 import com.swcontest.somding.service.qna.QnaCommandService
 import com.swcontest.somding.service.qna.QnaQueryService
 import io.swagger.v3.oas.annotations.Operation
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -33,16 +35,16 @@ class QnaController(private val qnaQueryService: QnaQueryService,
     //답 등록
     @Operation(summary = "질문 답 등록")
     @PatchMapping("/questions/answer")
-    fun updateAnswer(@RequestBody answerRequestDTO:AnswerRequestDTO):ApiResponse<String?>{
-        qnaCommandService.updateAnswer(answerRequestDTO, 1)
+    fun updateAnswer(@RequestBody answerRequestDTO:AnswerRequestDTO, @AuthenticationPrincipal member: Member):ApiResponse<String?>{
+        qnaCommandService.updateAnswer(answerRequestDTO, member)
         return ApiResponse.onSuccess(null)
     }
 
     //질문 수정
     @Operation(summary = "질문 수정")
     @PatchMapping("/questions")
-    fun updateQuestion(@RequestBody questionRequestDTO: UpdateQuestionRequestDTO): ApiResponse<String?>{
-        qnaCommandService.updateQuestion(questionRequestDTO, 1)
+    fun updateQuestion(@RequestBody questionRequestDTO: UpdateQuestionRequestDTO, @AuthenticationPrincipal member: Member): ApiResponse<String?>{
+        qnaCommandService.updateQuestion(questionRequestDTO, member)
         return ApiResponse.onSuccess(null)
     }
 
@@ -50,8 +52,8 @@ class QnaController(private val qnaQueryService: QnaQueryService,
     //질문 삭제
     @Operation(summary = "질문 삭제")
     @DeleteMapping("questions/{questionId}")
-    fun deleteQuestion(@PathVariable("questionId") questionId:Long): ApiResponse<String?>{
-        qnaCommandService.deleteQuestion(questionId, 1)
+    fun deleteQuestion(@PathVariable("questionId") questionId:Long, @AuthenticationPrincipal member: Member): ApiResponse<String?>{
+        qnaCommandService.deleteQuestion(questionId, member)
         return ApiResponse.onSuccess(null)
     }
     //질문 디테일 조회

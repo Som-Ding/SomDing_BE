@@ -2,8 +2,10 @@ package com.swcontest.somding.controller.scrap
 
 import com.swcontest.somding.common.apiPayload.ApiResponse
 import com.swcontest.somding.model.dto.response.ProjectResponseDTO
+import com.swcontest.somding.model.entity.member.Member
 import com.swcontest.somding.service.scrap.ScrapCommandService
 import com.swcontest.somding.service.scrap.ScrapQueryService
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.DeleteMapping
 import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PathVariable
@@ -27,8 +29,8 @@ class ScrapController(private val scrapQueryService: ScrapQueryService, private 
     }
 
     @GetMapping("/my")
-    fun readMyScrap():ApiResponse<List<ProjectResponseDTO>>{
-        return ApiResponse.onSuccess(scrapQueryService.readMyScrap(1))
+    fun readMyScrap(@AuthenticationPrincipal member: Member):ApiResponse<List<ProjectResponseDTO>>{
+        return ApiResponse.onSuccess(scrapQueryService.readMyScrap(member))
     }
 
 

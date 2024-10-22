@@ -4,11 +4,12 @@ import com.swcontest.somding.model.dto.request.AnswerRequestDTO
 import com.swcontest.somding.model.dto.request.UpdateQuestionRequestDTO
 import com.swcontest.somding.model.dto.response.QnaDetailResponseDTO
 import com.swcontest.somding.model.dto.response.QnaResponseDTO
+import com.swcontest.somding.model.entity.member.Member
 
 interface QnaQueryRepository {
     fun readQna(projectId:Long): List<QnaResponseDTO>
 
-    fun updateAnswer(answerRequestDTO: AnswerRequestDTO,memberId:Long)
+    fun updateAnswer(answerRequestDTO: AnswerRequestDTO,memberId: Long)
 
     fun deleteQuestion(questionId:Long, memberId: Long)
 
