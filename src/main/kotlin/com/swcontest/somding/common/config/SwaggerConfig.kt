@@ -1,27 +1,36 @@
 package com.swcontest.somding.common.config
 
+import io.swagger.v3.oas.models.Components
 import io.swagger.v3.oas.models.OpenAPI
 import io.swagger.v3.oas.models.info.Info
-import org.springdoc.core.models.GroupedOpenApi
+import io.swagger.v3.oas.models.security.SecurityRequirement
+import io.swagger.v3.oas.models.security.SecurityScheme
+import io.swagger.v3.oas.models.servers.Server
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
 @Configuration
 class SwaggerConfig {
-
     @Bean
-    fun publicApi(): GroupedOpenApi {
-        return GroupedOpenApi.builder()
-                .group("v1-definition")
-                .pathsToMatch("/**")
-                .build()
-    }
-
-    @Bean
-    fun springShopOpenAPI(): OpenAPI {
+    fun JuinjangAPI(): OpenAPI {
+        val info = Info()
+                .title("Somding API")
+                .description("Juinjang API 명세서")
+                .version("1.0.0")
+        val jwtSchemeName = "JWT TOKEN"
+        // API 요청헤더에 인증정보 포함
+        val securityRequirement = SecurityRequirement().addList(jwtSchemeName)
+        // SecuritySchemes 등록
+        val components = Components()
+                .addSecuritySchemes(jwtSchemeName, SecurityScheme()
+                        .name(jwtSchemeName)
+                        .type(SecurityScheme.Type.HTTP) // HTTP 방식
+                        .scheme("bearer")
+                        .bearerFormat("JWT"))
         return OpenAPI()
-                .info(Info().title("SomDing API")
-                        .description("SomDing 프로젝트 API 명세서입니다.")
-                        .version("v0.0.1"))
+                .addServersItem(Server().url("/"))
+                .info(info)
+                .addSecurityItem(securityRequirement)
+                .components(components)
     }
 }
