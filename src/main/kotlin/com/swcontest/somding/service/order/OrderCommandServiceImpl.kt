@@ -8,6 +8,7 @@ import com.swcontest.somding.exception.project.ProjectErrorCode
 import com.swcontest.somding.exception.project.ProjectException
 import com.swcontest.somding.mapper.OrderMapper
 import com.swcontest.somding.model.dto.request.CreateOrderRequestDTO
+import com.swcontest.somding.model.entity.member.Member
 import com.swcontest.somding.repository.member.MemberRepository
 import com.swcontest.somding.repository.order.OrderRepository
 import com.swcontest.somding.repository.project.ProjectRepository
@@ -22,8 +23,8 @@ private val memberRepository: MemberRepository,
         private val orderMapper: OrderMapper,
         private val orderRepository: OrderRepository
 ): OrderCommandService {
-    override fun createOrder(createOrderRequestDTO: CreateOrderRequestDTO, memberId: Long) {
-        val member = memberRepository.findById(1).orElseThrow(){ MemberException(MemberErrorCode.MEMBER_NOT_FOUND) }
+    override fun createOrder(createOrderRequestDTO: CreateOrderRequestDTO, member: Member) {
+        val member1 = memberRepository.findById(member.memberId).orElseThrow(){ MemberException(MemberErrorCode.MEMBER_NOT_FOUND) }
         val project = projectRepository.findById(createOrderRequestDTO.projectId).orElseThrow{ ProjectException(ProjectErrorCode.PROJECT_NOT_FOUND) }
 
         val invalidOptionIds = createOrderRequestDTO.optionId.filter { optionId ->
@@ -33,14 +34,14 @@ private val memberRepository: MemberRepository,
         if (invalidOptionIds.isNotEmpty()) {
             throw ProjectException(ProjectErrorCode.OPTION_NOT_FOUND)
         }
-        val order = orderMapper.toEntity(createOrderRequestDTO,member,project)
+        val order = orderMapper.toEntity(createOrderRequestDTO,member1,project)
 
         orderRepository.save(order)
         orderRepository.updateSponsor(project)
     }
 
-    override fun deleteOrder(orderId: Long, memberId: Long) {
-        orderRepository.deleteByOrderIdAndMemberId(orderId, memberId)
+    override fun deleteOrder(orderId: Long, member: Member) {
+        orderRepository.deleteByOrderIdAndMemberId(orderId, member.memberId)
     }
 
 }

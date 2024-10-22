@@ -7,9 +7,11 @@ import com.swcontest.somding.model.dto.request.ProjectRequestDTO
 import com.swcontest.somding.model.dto.response.ProjectResponseDTO
 import com.swcontest.somding.model.entity.enums.ClassifyCategory
 import com.swcontest.somding.model.entity.enums.ProjectCategory
+import com.swcontest.somding.model.entity.member.Member
 import com.swcontest.somding.service.project.ProjectCommandService
 import com.swcontest.somding.service.project.ProjectQueryService
 import io.swagger.v3.oas.annotations.Operation
+import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.web.bind.annotation.*
 
 @RestController
@@ -27,8 +29,8 @@ class ProjectController( private val projectCommandService: ProjectCommandServic
 
 
     @GetMapping("/my")
-    fun readMyProject():ApiResponse<List<ProjectResponseDTO>>{
-        return ApiResponse.onSuccess(projectQueryService.readMyProject(1))
+    fun readMyProject( @AuthenticationPrincipal member: Member):ApiResponse<List<ProjectResponseDTO>>{
+        return ApiResponse.onSuccess(projectQueryService.readMyProject(member))
     }
 
     @Operation(summary = "프로젝트 삭제")

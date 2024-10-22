@@ -5,9 +5,10 @@ import com.swcontest.somding.model.dto.response.ProjectDetailResponseDTO
 import com.swcontest.somding.model.dto.response.ProjectResponseDTO
 import com.swcontest.somding.model.entity.enums.ClassifyCategory
 import com.swcontest.somding.model.entity.enums.ProjectCategory
+import com.swcontest.somding.model.entity.member.Member
 
 interface ProjectQueryService {
-    fun readMyProject(memberId: Long): List<ProjectResponseDTO>
+    fun readMyProject(member: Member): List<ProjectResponseDTO>
 
     fun test(memberId: Long)
 

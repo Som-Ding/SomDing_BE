@@ -1,8 +1,9 @@
 package com.swcontest.somding.service.order
 
 import com.swcontest.somding.model.dto.response.ProjectResponseDTO
+import com.swcontest.somding.model.entity.member.Member
 
 interface OrderQueryService {
 
-    fun readMyOrder(memberId:Long): List<ProjectResponseDTO>
+    fun readMyOrder(member: Member): List<ProjectResponseDTO>
 }
