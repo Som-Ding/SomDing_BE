@@ -1,6 +1,5 @@
 package com.swcontest.somding.model.dto.request.member
 
 data class UpdateProfileRequestDTO(
-        val nickname: String,
-        val profileImg: String?
+        val nickname: String
 )

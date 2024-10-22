@@ -7,6 +7,7 @@ import com.swcontest.somding.model.dto.request.member.UpdateProfileRequestDTO
 import com.swcontest.somding.model.dto.response.auth.TokenResponseDTO
 import com.swcontest.somding.model.entity.member.Member
 import jakarta.servlet.http.HttpServletRequest
+import org.springframework.web.multipart.MultipartFile
 
 interface MemberCommandService {
 
@@ -15,7 +16,7 @@ interface MemberCommandService {
 
     fun reissue(request: HttpServletRequest, member:Member): TokenResponseDTO
 
-    fun updateProfile(updateProfileRequestDTO: UpdateProfileRequestDTO, member: Member)
+    fun updateProfile(updateProfileRequestDTO: UpdateProfileRequestDTO,image:MultipartFile, member: Member)
 
     fun updatePassword(updatePasswordDTO: UpdatePasswordRequestDTO, member: Member)
 

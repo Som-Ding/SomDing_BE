@@ -7,21 +7,21 @@ import com.swcontest.somding.model.dto.response.member.ReadProfileResponseDTO
 import com.swcontest.somding.model.entity.member.Member
 import com.swcontest.somding.service.auth.MemberCommandService
 import com.swcontest.somding.service.auth.MemberQueryService
+import org.springframework.http.MediaType
 import org.springframework.security.core.annotation.AuthenticationPrincipal
-import org.springframework.web.bind.annotation.GetMapping
-import org.springframework.web.bind.annotation.PatchMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
+import org.springframework.web.multipart.MultipartFile
 
 @RestController
 @RequestMapping("/api/member")
 class MemberController(private val memberCommandService: MemberCommandService,
         private val memberQueryService: MemberQueryService) {
 
-    @PatchMapping("/profile")
-    fun updateProfile(@RequestBody updateProfileRequestDTO: UpdateProfileRequestDTO, @AuthenticationPrincipal member: Member): ApiResponse<String?>{
-        memberCommandService.updateProfile(updateProfileRequestDTO, member)
+    @PatchMapping(value = ["/profile"], consumes = [MediaType.MULTIPART_FORM_DATA_VALUE], produces = [MediaType.APPLICATION_JSON_VALUE])
+    fun updateProfile(@RequestPart("updateProfileDTO") updateProfileRequestDTO: UpdateProfileRequestDTO,
+                      @RequestPart("image") image: MultipartFile,
+                      @AuthenticationPrincipal member: Member): ApiResponse<String?>{
+        memberCommandService.updateProfile(updateProfileRequestDTO, image, member)
 
         return ApiResponse.onSuccess(null)
     }
