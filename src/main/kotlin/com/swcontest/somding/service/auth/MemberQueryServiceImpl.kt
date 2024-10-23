@@ -16,7 +16,7 @@ class MemberQueryServiceImpl(
     override fun readProfile(member: Member): ReadProfileResponseDTO {
         val getMember: Member = memberRepository.findById(member.memberId)
                 .orElseThrow { MemberException(MemberErrorCode.MEMBER_NOT_FOUND) }
-        return ReadProfileResponseDTO( getMember.nickname, getMember.profileImg)
+        return ReadProfileResponseDTO( getMember.nickname, getMember.profileImg, getMember.email)
     }
 
 
