@@ -61,7 +61,10 @@ class ProjectQueryRepositoryImpl(
                                 project.targetDate,
                                 project.sponsorNum,
                                 project.price,
-                                scrapCountSubquery // 서브쿼리 사용
+                                scrapCountSubquery, // 서브쿼리 사용
+                                project.introduce,
+                                project.policy,
+                                project.schedule
                         )
                 )
                 .from(project)
@@ -75,7 +78,10 @@ class ProjectQueryRepositoryImpl(
                         project.gatherPrice,
                         project.targetDate,
                         project.sponsorNum,
-                        project.price
+                        project.price,
+                        project.introduce,
+                        project.policy,
+                        project.schedule
                 )
                 .fetchOne() ?: throw ProjectException(ProjectErrorCode.PROJECT_NOT_FOUND)
 
@@ -110,6 +116,9 @@ class ProjectQueryRepositoryImpl(
                 sponsorNum = projectDetail.sponsorNum,
                 price = projectDetail.price,
                 scrapNum = projectDetail.scrapNum,
+                introduce = projectDetail.introduce,
+                policy = projectDetail.policy,
+                schedule = projectDetail.schedule,
                 imgList = imgList,
                 colorList = colorList,
                 sizeList = sizeList,
