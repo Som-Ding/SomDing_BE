@@ -4,8 +4,8 @@ import com.querydsl.core.types.Projections
 import com.querydsl.jpa.impl.JPAQueryFactory
 import com.swcontest.somding.exception.order.OrderErrorCode
 import com.swcontest.somding.exception.order.OrderException
+import com.swcontest.somding.model.dto.response.ProjectOrderResponseDTO
 import com.swcontest.somding.model.dto.response.ProjectResponseDTO
-import com.swcontest.somding.model.entity.order.Order
 import com.swcontest.somding.model.entity.order.QOrder.order
 import com.swcontest.somding.model.entity.project.Project
 import com.swcontest.somding.model.entity.project.QProject.project
@@ -14,10 +14,10 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class OrderQueryRepositoryImpl( private val jpaQueryFactory: JPAQueryFactory): OrderQueryRepository {
-    override fun getMyOrder(memberId: Long): List<ProjectResponseDTO> {
+    override fun getMyOrder(memberId: Long): List<ProjectOrderResponseDTO> {
         return jpaQueryFactory
                 .selectDistinct(Projections.constructor(
-                        ProjectResponseDTO::class.java,
+                        ProjectOrderResponseDTO::class.java,
                         project.projectId,
                         project.title,
                         projectImage.imageUrl,
@@ -25,6 +25,7 @@ class OrderQueryRepositoryImpl( private val jpaQueryFactory: JPAQueryFactory): O
                         project.targetPrice,
                         project.gatherPrice,
                         project.price,
+                        project.targetDate,
                         order.orderId
                 ))
                 .from(order)

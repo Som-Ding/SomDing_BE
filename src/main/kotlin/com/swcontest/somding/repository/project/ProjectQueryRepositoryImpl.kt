@@ -32,7 +32,8 @@ class ProjectQueryRepositoryImpl(
                 project.category,
                 project.targetPrice,
                 project.gatherPrice,
-                project.price
+                project.price,
+                project.targetDate
         ))
                 .from(project)
                 .leftJoin(project.projectImgList, projectImage)
@@ -126,7 +127,8 @@ class ProjectQueryRepositoryImpl(
                 project.category,
                 project.targetPrice,
                 project.gatherPrice,
-                project.price
+                project.price,
+                project.targetDate
         ))
                 .from(project)
                 .leftJoin(project.projectImgList, projectImage)

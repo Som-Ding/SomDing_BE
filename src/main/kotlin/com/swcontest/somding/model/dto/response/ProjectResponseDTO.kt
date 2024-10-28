@@ -15,7 +15,18 @@ data class ProjectResponseDTO(
         val targetPrice: Int,
         val gatherPrice: Int,
         val price: Int,
-//        @JsonInclude(JsonInclude.Include.NON_NULL)
-//        val orderId: Long?
+        val targetDate: LocalDate
+)
+
+data class ProjectOrderResponseDTO(
+        val projectId: Long,
+        val title: String,
+        val img: String?,
+        val category: ProjectCategory,
+        val targetPrice: Int,
+        val gatherPrice: Int,
+        val price: Int,
+        val targetDate: LocalDate,
+        val orderId: Long
 )
 

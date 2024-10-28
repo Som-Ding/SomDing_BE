@@ -2,6 +2,7 @@ package com.swcontest.somding.controller.order
 
 import com.swcontest.somding.common.apiPayload.ApiResponse
 import com.swcontest.somding.model.dto.request.CreateOrderRequestDTO
+import com.swcontest.somding.model.dto.response.ProjectOrderResponseDTO
 import com.swcontest.somding.model.dto.response.ProjectResponseDTO
 import com.swcontest.somding.model.entity.member.Member
 import com.swcontest.somding.service.order.OrderCommandService
@@ -37,7 +38,7 @@ class OrderController(
 
 
     @GetMapping("/my")
-    fun readMyOrder(@AuthenticationPrincipal member: Member):ApiResponse<List<ProjectResponseDTO>>{
+    fun readMyOrder(@AuthenticationPrincipal member: Member):ApiResponse<List<ProjectOrderResponseDTO>>{
         return ApiResponse.onSuccess(orderQueryService.readMyOrder(member))
 
     }

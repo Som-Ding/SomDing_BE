@@ -10,8 +10,6 @@ import com.swcontest.somding.model.entity.member.Member
 interface ProjectQueryService {
     fun readMyProject(member: Member): List<ProjectResponseDTO>
 
-    fun test(memberId: Long)
-
 
     fun readProject(projectId: Long): ProjectDetailImgResponseDTO
 

@@ -19,11 +19,6 @@ class ProjectQueryServiceImpl(val projectRepository: ProjectRepository
     }
 
 
-    override fun test(memberId: Long){
-//        projectRepository.findMyProjectByMemberId(2)
-        projectRepository.findById(1)
-    }
-
     override fun readProject(projectId: Long): ProjectDetailImgResponseDTO {
         return projectRepository.getProject(projectId)
     }
