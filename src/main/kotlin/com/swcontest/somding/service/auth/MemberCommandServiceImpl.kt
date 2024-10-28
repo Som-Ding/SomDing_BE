@@ -15,6 +15,7 @@ import com.swcontest.somding.model.entity.member.Member
 import com.swcontest.somding.model.entity.project.ProjectImage
 import com.swcontest.somding.repository.member.MemberRepository
 import jakarta.servlet.http.HttpServletRequest
+import org.slf4j.LoggerFactory
 import org.springframework.security.crypto.password.PasswordEncoder
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
@@ -31,6 +32,8 @@ class MemberCommandServiceImpl(
         private val jwtManager: JwtManager,
         private val s3Manager: S3Manager,
 ): MemberCommandService {
+    private val logger = LoggerFactory.getLogger(MemberCommandServiceImpl::class.java)
+
     override fun signup(signupRequestDTO: SignupRequestDTO) {
         if (memberRepository.findByEmail(signupRequestDTO.email) != null) {
             throw MemberException(MemberErrorCode.MEMBER_ALREADY_EXIST)
@@ -49,13 +52,17 @@ class MemberCommandServiceImpl(
         val member: Member = memberRepository.findByEmail(loginRequestDTO.email)
                 ?: throw MemberException(MemberErrorCode.MEMBER_NOT_FOUND)
         val checkPw = passwordEncoder.matches(loginRequestDTO.password, member.password)
+        logger.info(checkPw.toString())
+        logger.info(loginRequestDTO.password)
+        logger.info("---------------------------------------")
+        logger.info(member.password)
         if (checkPw) {
             val  refreshToken = jwtManager.generateRefreshToken(member.memberId) // 토큰 발급
             val  accessToken = jwtManager.generateAccessToken(member.memberId)
             member.updateRefreshToken(refreshToken)
             return  TokenResponseDTO(accessToken, refreshToken)
         } else {
-            throw MemberException(MemberErrorCode.MEMBER_NOT_FOUND)
+            throw MemberException(MemberErrorCode.PASSWORD_NOT_MATCH)
         }
     }
 
