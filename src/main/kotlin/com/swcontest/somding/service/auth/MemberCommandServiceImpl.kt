@@ -52,10 +52,6 @@ class MemberCommandServiceImpl(
         val member: Member = memberRepository.findByEmail(loginRequestDTO.email)
                 ?: throw MemberException(MemberErrorCode.MEMBER_NOT_FOUND)
         val checkPw = passwordEncoder.matches(loginRequestDTO.password, member.password)
-        logger.info(checkPw.toString())
-        logger.info(loginRequestDTO.password)
-        logger.info("---------------------------------------")
-        logger.info(member.password)
         if (checkPw) {
             val  refreshToken = jwtManager.generateRefreshToken(member.memberId) // 토큰 발급
             val  accessToken = jwtManager.generateAccessToken(member.memberId)

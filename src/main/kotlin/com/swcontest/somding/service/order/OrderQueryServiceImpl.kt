@@ -1,5 +1,6 @@
 package com.swcontest.somding.service.order
 
+import com.swcontest.somding.model.dto.response.ProjectOrderResponseDTO
 import com.swcontest.somding.model.dto.response.ProjectResponseDTO
 import com.swcontest.somding.model.entity.member.Member
 import com.swcontest.somding.repository.order.OrderRepository
@@ -9,7 +10,7 @@ import org.springframework.stereotype.Service
 class OrderQueryServiceImpl
 (private val orderRepository: OrderRepository
         ): OrderQueryService {
-    override fun readMyOrder(member:Member): List<ProjectResponseDTO> {
+    override fun readMyOrder(member:Member): List<ProjectOrderResponseDTO> {
         return orderRepository.getMyOrder(member.memberId)
     }
 }
