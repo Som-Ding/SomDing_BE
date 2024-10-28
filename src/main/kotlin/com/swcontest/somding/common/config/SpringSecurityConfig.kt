@@ -63,11 +63,4 @@ class SpringSecurityConfig(
                 .addFilterBefore(jwtExceptionFilter, JwtAuthenticationFilter::class.java)
         return http.build()
     }
-
-    @Bean
-    fun passwordEncoder(): PasswordEncoder {
-        return BCryptPasswordEncoder()
-    }
-
-
 }
