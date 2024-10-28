@@ -15,6 +15,10 @@ data class ProjectDetailResponseDTO(
         val sponsorNum: Int,
         val price: Int,
         val scrapNum: Long,
+        val introduce: String,
+        val policy: String,
+        val schedule: String
+
 )
 
 data class ProjectDetailImgResponseDTO(
@@ -28,6 +32,9 @@ data class ProjectDetailImgResponseDTO(
         val sponsorNum: Int,
         val price: Int,
         val scrapNum: Long,
+        val introduce: String,
+        val policy: String,
+        val schedule: String,
         val imgList: List<String>,
         @JsonInclude(JsonInclude.Include.NON_NULL)
         val colorList: List<OptionDTO>?,
