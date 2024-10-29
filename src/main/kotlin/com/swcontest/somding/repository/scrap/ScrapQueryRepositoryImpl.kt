@@ -19,8 +19,7 @@ class ScrapQueryRepositoryImpl( private val jpaQueryFactory: JPAQueryFactory
                 project.targetPrice,
                 project.gatherPrice,
                 project.price,
-                project.targetDate,
-                null
+                project.targetDate
         ))
                 .from(project)
                 .leftJoin(scrap).on(scrap.project.projectId.eq(project.projectId))
