@@ -1,7 +1,9 @@
 package com.swcontest.somding.service.scrap
 
-interface ScrapCommandService {
-    fun createScrap(projectId: Long)
+import com.swcontest.somding.model.entity.member.Member
 
-    fun deleteScrap(projectId: Long)
+interface ScrapCommandService {
+    fun createScrap(projectId: Long, member: Member)
+
+    fun deleteScrap(projectId: Long, member: Member)
 }

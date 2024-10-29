@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RestController
 class ScrapController(private val scrapQueryService: ScrapQueryService, private val scrapCommandService: ScrapCommandService) {
 
     @GetMapping("{projectId}")
-    fun createScrap(@PathVariable("projectId")projectId: Long):ApiResponse<String?>{
-        scrapCommandService.createScrap(projectId)
+    fun createScrap(@PathVariable("projectId")projectId: Long, @AuthenticationPrincipal member: Member):ApiResponse<String?>{
+        scrapCommandService.createScrap(projectId, member)
         return ApiResponse.onSuccess(null)
     }
 
     @DeleteMapping("{projectId}")
-    fun deleteScrap(@PathVariable("projectId")projectId: Long):ApiResponse<String?>{
-        scrapCommandService.deleteScrap(projectId)
+    fun deleteScrap(@PathVariable("projectId")projectId: Long, @AuthenticationPrincipal member: Member):ApiResponse<String?>{
+        scrapCommandService.deleteScrap(projectId, member)
         return ApiResponse.onSuccess(null)
     }
 

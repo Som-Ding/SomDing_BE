@@ -41,7 +41,7 @@ class ProjectController( private val projectCommandService: ProjectCommandServic
 
     @Operation(summary = "프로젝트 삭제")
     @DeleteMapping("/{projectId}")
-    fun deleteProject(@PathVariable("projectId") projectId: Long, member: Member): ApiResponse<String?>{
+    fun deleteProject(@PathVariable("projectId") projectId: Long, @AuthenticationPrincipal member: Member): ApiResponse<String?>{
 
         projectCommandService.deleteProject(projectId, member)
         return ApiResponse.onSuccess(null)
